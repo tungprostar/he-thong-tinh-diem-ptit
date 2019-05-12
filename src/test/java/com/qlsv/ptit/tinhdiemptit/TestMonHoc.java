@@ -25,7 +25,7 @@ public class TestMonHoc {
 	@Test
 	public void testTongSoMonHoc() {
 		List<MonHoc> lstMonHoc = monHocService.findMonHocDropDown();
-		assertNotNull(lstMonHoc);
+		assertEquals(3, lstMonHoc.size());
 	}
 
 	@Test
