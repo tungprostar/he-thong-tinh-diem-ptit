@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: tinh-diem-ptit
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: tungp
+Implementation-Vendor-Id: com.qlsv.ptit
+Build-Jdk: 1.8.0_172
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/tinh-diem-ptit
+Created-By: Maven Integration for Eclipse
+
