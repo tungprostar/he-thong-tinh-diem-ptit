@@ -2,6 +2,46 @@ drop database if exists tinhdiemptit;
 create database tinhdiemptit;
 use tinhdiemptit;
 
+CREATE TABLE users (
+  username varchar(50) NOT NULL,
+  password char(68) NOT NULL,
+  enabled tinyint(1) NOT NULL,
+  PRIMARY KEY (username)
+) CHARACTER SET UTF8;
+
+INSERT INTO users
+VALUES 
+('admin','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1),
+('khanh123','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1),
+('ngoc123','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1),
+('hung123','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1),
+('phuong123','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1);
+
+--
+-- Table structure for table `authorities`
+--
+
+DROP TABLE IF EXISTS authorities;
+CREATE TABLE `authorities` (
+  username varchar(50) NOT NULL,
+  authority varchar(50) NOT NULL,
+  UNIQUE KEY authorities_idx_1 (username,authority),
+  CONSTRAINT authorities_ibfk_1 FOREIGN KEY (username) REFERENCES users (username)
+) CHARACTER SET UTF8;
+
+--
+-- Dumping data for table `authorities`
+--
+
+INSERT INTO authorities
+VALUES 
+('admin','ROLE_ADMIN'),
+('khanh123', 'ROLE_TEACHERINT1427'),
+('ngoc123', 'ROLE_TEACHERINT1416'),
+('phuong123', 'ROLE_TEACHERINT1408'),
+('hung123', 'ROLE_TEACHERINT1427'),
+('hung123', 'ROLE_TEACHERINT1408');
+
 create table sinhvien (
   ma_sv   varchar(100) not null, 
   ho_lot  varchar(100), 
@@ -40,7 +80,9 @@ create table sinhvien_monhoc (
 
 create table giangvien(
 	ma_gv int primary key auto_increment, 
-    ho_ten varchar(100)
+    ho_ten varchar(100),
+    username varchar(50) not null,
+    foreign key (username) references users(username)
 )CHARACTER SET UTF8;
 
 create table monhoc_giangvien(
@@ -61,40 +103,3 @@ create table diemso(
     sinhvien_monhoc_id int,
 	foreign key (sinhvien_monhoc_id) references sinhvien_monhoc(id)
 )CHARACTER SET UTF8;
-
-CREATE TABLE `users` (
-  `username` varchar(50) NOT NULL,
-  `password` char(68) NOT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  PRIMARY KEY (`username`)
-) CHARACTER SET UTF8;
-
-INSERT INTO `users` 
-VALUES 
-('admin','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1),
-('khanh123','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1),
-('ngoc123','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1),
-('phuong123','{bcrypt}$2a$10$9zi5mDR0iCTlWHG8jknu/uCtTE7qgzGepTTg9nNI4a81yy6f6GKhq',1);
-
---
--- Table structure for table `authorities`
---
-
-DROP TABLE IF EXISTS `authorities`;
-CREATE TABLE `authorities` (
-  `username` varchar(50) NOT NULL,
-  `authority` varchar(50) NOT NULL,
-  UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
-  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-) CHARACTER SET UTF8;
-
---
--- Dumping data for table `authorities`
---
-
-INSERT INTO `authorities` 
-VALUES 
-('admin','ROLE_ADMIN'),
-('khanh123', 'ROLE_TEACHERINT1427'),
-('ngoc123', 'ROLE_TEACHERINT1416'),
-('phuong123', 'ROLE_TEACHERINT1408');

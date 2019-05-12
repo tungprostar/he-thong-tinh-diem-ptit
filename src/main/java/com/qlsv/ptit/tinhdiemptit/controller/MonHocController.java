@@ -87,9 +87,9 @@ public class MonHocController {
 		return "/sinhvien/danhsachsinhvien";
 	}
 
-	@PostMapping("/saveDiemSo")
-	public String saveDiemSinhVien(Model model, RedirectAttributes ra, @Valid @ModelAttribute("lst") DiemSos lst,
-			@RequestParam("nhomMH") Integer nhomMonHoc, @RequestParam("maMH") String maMonHoc,
+	@PostMapping("/{maMonHoc}/{nhomMonHoc}/dssv/saveDiemSo")
+	public String saveDiemSinhVien(Model model, RedirectAttributes ra, @ModelAttribute("lst") DiemSos lst,
+			@PathVariable Integer nhomMonHoc, @PathVariable String maMonHoc,
 			@RequestParam("tenMH") String tenMH, @RequestParam("giangVien") String giangVien,
 			@RequestParam("cauHinh") String cauHinhDiem) {
 		
@@ -104,6 +104,6 @@ public class MonHocController {
 		ra.addAttribute("tenMH", tenMH);
 		ra.addAttribute("cauHinhDiem", cauHinhDiem);
 		ra.addAttribute("maMonHoc", maMonHoc);
-		return "redirect:/monhoc/" +maMonHoc+ "/dssv";
+		return "redirect:/monhoc/" +maMonHoc+ "/" +nhomMonHoc+ "/dssv";
 	}
 }

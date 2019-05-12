@@ -21,6 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/monhoc/INT1408/**").hasAnyRole("TEACHERINT1408", "ADMIN")
 			.antMatchers("/monhoc/INT1416/**").hasAnyRole("TEACHERINT1416", "ADMIN")
 			.antMatchers("/monhoc/INT1427/**").hasAnyRole("TEACHERINT1427", "ADMIN")
+			.antMatchers("/cauhinh/**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 				.and()
 			.formLogin()

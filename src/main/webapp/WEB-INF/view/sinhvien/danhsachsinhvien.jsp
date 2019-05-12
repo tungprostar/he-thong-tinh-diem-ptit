@@ -39,7 +39,7 @@
 				</div>
 			</c:if>
 			<form:form
-				action="${pageContext.request.contextPath}/monhoc/saveDiemSo"
+				action="${pageContext.request.contextPath}/monhoc/${maMonHoc }/${nhomMH }/dssv/saveDiemSo"
 				modelAttribute="lst" method="POST">
 				<p>
 					<strong>Tên môn học:</strong> ${tenMH }&ensp; <strong>Nhóm

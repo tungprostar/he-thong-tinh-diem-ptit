@@ -6,8 +6,8 @@ insert into monhoc(ma_monhoc, ten_monhoc, so_tc, cauhinhdiem_ma_cauhinh) values
 ('INT1427', 'Phát triển phần mềm hướng dịch vụ', 3, 2),
 ('INT1408', 'Chuyên đề công nghệ phần mềm', 1, 3);
 
-insert into giangvien(ho_ten) values 
-('Đỗ Thị Bích Ngọc'), ('Nguyễn Trọng Khánh'), ('Nguyễn Duy Phương'), ('Nguyễn Mạnh Hùng');
+insert into giangvien(ho_ten, username) values 
+('Đỗ Thị Bích Ngọc', 'ngoc123'), ('Nguyễn Trọng Khánh', 'khanh123'), ('Nguyễn Duy Phương', 'phuong123'), ('Nguyễn Mạnh Hùng', 'hung123');
 
 insert into nhommonhoc(nhom_monhoc, monhoc_ma_monhoc) values
 (1, 'INT1416'), (2, 'INT1416'), (3, 'INT1416'), (4, 'INT1416'), (5, 'INT1416'),
