@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.qlsv.ptit.tinhdiemptit.entity.MonHoc;
 import com.qlsv.ptit.tinhdiemptit.entity.NhomMonHoc;
 import com.qlsv.ptit.tinhdiemptit.resultobject.DiemSos;
+import com.qlsv.ptit.tinhdiemptit.resultobject.MonHoc_MaMonHoc;
 import com.qlsv.ptit.tinhdiemptit.resultobject.MonHocs;
 import com.qlsv.ptit.tinhdiemptit.resultobject.SinhVien_Diem;
 import com.qlsv.ptit.tinhdiemptit.service.CauHinhDiemService;
@@ -42,20 +43,23 @@ public class MonHocController {
 
 	@Autowired
 	private TinhDiemService tinhDiemService;
+	
+	private String cauHinhCheck;
 
 	@GetMapping(value= {"", "/{maMonHoc}", "/{maMonHoc}/{nhomMonHoc}"})
 	public String getListMonHocTheoNhom(Model model, @PathVariable(required = false) String maMonHoc,
 			@PathVariable(required = false) Integer nhomMonHoc) {
-		List<MonHoc> listMonHoc = monHocService.findMonHocDropDown();
+		List<MonHoc_MaMonHoc> listMonHoc = monHocService.findMonHocDropDown();
 		model.addAttribute("listMonHoc", listMonHoc);
 		if (maMonHoc != null) {
-			List<NhomMonHoc> listNhomMonHoc = monHocService.findNhomMonHocDropDown(maMonHoc);
+			List<Integer> listNhomMonHoc = monHocService.findNhomMonHocDropDown(maMonHoc);
 			List<MonHocs> listMonHocs = monHocService.findById(maMonHoc, nhomMonHoc);
 			String cauHinhDiem = cauHinhDiemService.findById(maMonHoc);
 			model.addAttribute("cauHinhDiem", cauHinhDiem);
 			model.addAttribute("selectedId", maMonHoc);
 			model.addAttribute("listNhomMonHoc", listNhomMonHoc);
 			model.addAttribute("listMonHocs", listMonHocs);
+			cauHinhCheck = cauHinhDiem;
 			if (nhomMonHoc != null) {
 				model.addAttribute("selectedNhom", nhomMonHoc);
 			}
@@ -73,7 +77,7 @@ public class MonHocController {
 			@RequestParam(name = "giangVien", required = false) String giangVien,
 			@RequestParam(name = "cauHinhDiem", required = false) String cauHinhDiem) {
 		List<SinhVien_Diem> listSinhVienDiem = sinhVienService.findByNhomMonHoc(maMonHoc, nhomMonHoc);
-		if(!cauHinhDiem.isEmpty()) {
+		if(!cauHinhDiem.isEmpty() && cauHinhDiem != cauHinhCheck) {
 			tinhDiemService.formatCauHinh(cauHinhDiem);	
 			tinhDiemService.setDiemSinhVien(listSinhVienDiem, nhomMonHoc, maMonHoc);
 		}	

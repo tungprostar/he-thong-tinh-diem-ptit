@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,25 +36,20 @@ public class GiangVien {
 			inverseJoinColumns = @JoinColumn(name="nhommonhoc_nhom_monhoc")
 			)
 	private List<MonHoc> monHocs;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="username")
+	private User user;
 
-	public List<MonHoc> getMonHocs() {
-		return monHocs;
-	}
-
-	public void setMonHocs(List<MonHoc> monHocs) {
-		this.monHocs = monHocs;
-	}
-
-	public GiangVien(String maGV, String hoTen) {
-		this.maGV = maGV;
-		this.hoTen = hoTen;
+	public GiangVien() {
+		
 	}
 	
-	public void themMonHoc(MonHoc tempMonHoc) {
-		if(monHocs == null) {
-			monHocs = new ArrayList<MonHoc>();
-		}
-		monHocs.add(tempMonHoc);
+	public GiangVien(String maGV, String hoTen, List<MonHoc> monHocs, User user) {
+		this.maGV = maGV;
+		this.hoTen = hoTen;
+		this.monHocs = monHocs;
+		this.user = user;
 	}
 
 	public String getMaGV() {
@@ -69,6 +66,22 @@ public class GiangVien {
 
 	public void setHoTen(String hoTen) {
 		this.hoTen = hoTen;
+	}
+
+	public List<MonHoc> getMonHocs() {
+		return monHocs;
+	}
+
+	public void setMonHocs(List<MonHoc> monHocs) {
+		this.monHocs = monHocs;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

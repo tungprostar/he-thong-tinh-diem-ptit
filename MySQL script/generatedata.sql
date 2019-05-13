@@ -42,3 +42,36 @@ right join nhommonhoc on nhommonhoc_id = nhommonhoc.id
 right join sinhvien on sinhvien_ma_sv = ma_sv
 where monhoc_ma_monhoc = 'INT1408';
 
+select ten_monhoc, nhom_monhoc from nhommonhoc 
+join monhoc on monhoc.ma_monhoc = nhommonhoc.monhoc_ma_monhoc
+join monhoc_giangvien on nhommonhoc_nhom_monhoc = nhommonhoc.monhoc_ma_monhoc
+join giangvien on giangvien_ma_gv = ma_gv
+join users on users.username = giangvien.username;
+
+select monhoc3_.ten_monhoc as col_0_0_, nhommonhoc0_.nhom_monhoc as col_1_0_, giangvien2_.ho_ten as col_2_0_, monhoc3_.so_tc as col_3_0_ from nhommonhoc nhommonhoc0_ 
+inner join monhoc_giangvien giangviens1_ on nhommonhoc0_.id=giangviens1_.nhommonhoc_nhom_monhoc 
+inner join giangvien giangvien2_ on giangviens1_.giangvien_ma_gv=giangvien2_.ma_gv 
+cross join monhoc monhoc3_ 
+where nhommonhoc0_.monhoc_ma_monhoc=monhoc3_.ma_monhoc and nhommonhoc0_.monhoc_ma_monhoc = 'INT1408'
+and giangvien2_.username like 'hung123';
+
+select distinct monhoc3_.ten_monhoc as col_0_0_, nhommonhoc0_.monhoc_ma_monhoc as col_1_0_ from nhommonhoc nhommonhoc0_ 
+inner join monhoc_giangvien giangviens1_ on nhommonhoc0_.id=giangviens1_.nhommonhoc_nhom_monhoc 
+inner join giangvien giangvien2_ on giangviens1_.giangvien_ma_gv=giangvien2_.ma_gv 
+cross join monhoc monhoc3_ 
+where nhommonhoc0_.monhoc_ma_monhoc=monhoc3_.ma_monhoc and giangvien2_.username like 'hung123';
+
+select nhommonhoc0_.id as id1_6_, nhommonhoc0_.monhoc_ma_monhoc as monhoc_m3_6_, nhommonhoc0_.nhom_monhoc as nhom_mon2_6_ from nhommonhoc nhommonhoc0_ 
+inner join monhoc_giangvien giangviens1_ on nhommonhoc0_.id=giangviens1_.nhommonhoc_nhom_monhoc 
+inner join giangvien giangvien2_ on giangviens1_.giangvien_ma_gv=giangvien2_.ma_gv 
+where nhommonhoc0_.monhoc_ma_monhoc='INT1427' and giangvien2_.username like 'hung123' order by nhommonhoc0_.nhom_monhoc asc;
+
+select monhoc3_.ten_monhoc as col_0_0_, nhommonhoc0_.nhom_monhoc as col_1_0_, giangvien2_.ho_ten as col_2_0_, monhoc3_.so_tc as col_3_0_ from nhommonhoc nhommonhoc0_ 
+inner join monhoc_giangvien giangviens1_ on nhommonhoc0_.id=giangviens1_.nhommonhoc_nhom_monhoc 
+inner join giangvien giangvien2_ on giangviens1_.giangvien_ma_gv=giangvien2_.ma_gv 
+cross join monhoc monhoc3_ where nhommonhoc0_.monhoc_ma_monhoc=monhoc3_.ma_monhoc and nhommonhoc0_.monhoc_ma_monhoc='INT1427' and (giangvien2_.username like '%%');
+
+select nhommonhoc0_.id as id1_6_0_, giangvien2_.ma_gv as ma_gv1_3_1_, nhommonhoc0_.monhoc_ma_monhoc as monhoc_m3_6_0_, nhommonhoc0_.nhom_monhoc as nhom_mon2_6_0_, giangvien2_.ho_ten as ho_ten2_3_1_, giangvien2_.username as username3_3_1_ from nhommonhoc nhommonhoc0_ 
+inner join monhoc_giangvien giangviens1_ on nhommonhoc0_.id=giangviens1_.nhommonhoc_nhom_monhoc 
+inner join giangvien giangvien2_ on giangviens1_.giangvien_ma_gv=giangvien2_.ma_gv 
+where (giangvien2_.username like '%%') and nhommonhoc0_.monhoc_ma_monhoc='INT1427' order by nhommonhoc0_.nhom_monhoc asc;

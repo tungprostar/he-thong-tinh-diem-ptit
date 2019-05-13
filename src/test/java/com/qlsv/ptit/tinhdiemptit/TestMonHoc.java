@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.qlsv.ptit.tinhdiemptit.entity.MonHoc;
+import com.qlsv.ptit.tinhdiemptit.dao.MonHocDAO;
 import com.qlsv.ptit.tinhdiemptit.entity.NhomMonHoc;
+import com.qlsv.ptit.tinhdiemptit.resultobject.MonHoc_MaMonHoc;
 import com.qlsv.ptit.tinhdiemptit.resultobject.MonHocs;
 import com.qlsv.ptit.tinhdiemptit.service.MonHocService;
 
@@ -21,16 +22,19 @@ public class TestMonHoc {
 	
 	@Autowired
 	private MonHocService monHocService;
+	
+	private MonHocDAO monHocDAO;
 
+	// Chi test duoc khi khong co dang nhap
 	@Test
 	public void testTongSoMonHoc() {
-		List<MonHoc> lstMonHoc = monHocService.findMonHocDropDown();
+		List<MonHoc_MaMonHoc> lstMonHoc = monHocService.findMonHocDropDown();
 		assertEquals(3, lstMonHoc.size());
 	}
 
 	@Test
 	public void testTongNhomMonHocTheoMaMonHoc() {
-		List<NhomMonHoc> lstNhomMH = monHocService.findNhomMonHocDropDown("INT1416");
+		List<Integer> lstNhomMH = monHocService.findNhomMonHocDropDown("INT1416");
 		assertEquals(5, lstNhomMH.size());
 	}
 	

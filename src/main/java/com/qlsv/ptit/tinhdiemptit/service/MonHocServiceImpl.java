@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.qlsv.ptit.tinhdiemptit.dao.MonHocDAO;
 import com.qlsv.ptit.tinhdiemptit.entity.MonHoc;
 import com.qlsv.ptit.tinhdiemptit.entity.NhomMonHoc;
+import com.qlsv.ptit.tinhdiemptit.resultobject.MonHoc_MaMonHoc;
 import com.qlsv.ptit.tinhdiemptit.resultobject.MonHocs;
 
 @Service
@@ -25,13 +26,13 @@ public class MonHocServiceImpl implements MonHocService {
 
 	@Override
 	@Transactional
-	public List<MonHoc> findMonHocDropDown() {
+	public List<MonHoc_MaMonHoc> findMonHocDropDown() {
 		return monHocDAO.findMonHocDropDown();
 	}
 
 	@Override
 	@Transactional
-	public List<NhomMonHoc> findNhomMonHocDropDown(String maMH) {
+	public List<Integer> findNhomMonHocDropDown(String maMH) {
 		return monHocDAO.findNhomMonHocDropDown(maMH);
 	}
 

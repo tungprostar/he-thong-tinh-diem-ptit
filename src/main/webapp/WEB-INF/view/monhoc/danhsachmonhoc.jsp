@@ -59,25 +59,25 @@
 									value="${pageContext.request.contextPath}/monhoc/${selectedId }"
 									label="Lựa chọn"></form:option>
 								<c:forEach var="item" items="${listNhomMonHoc }">
-									<c:url value="/monhoc/${selectedId }/${item.nhomMonHoc }" var="selectedLink2">								
+									<c:url value="/monhoc/${selectedId }/${item }" var="selectedLink2">								
 									</c:url>
 									<c:if test="${empty selectedNhom }">
-										<form:option value="${selectedLink2 }">Nhóm ${item.nhomMonHoc }</form:option>
+										<form:option value="${selectedLink2 }">Nhóm ${item }</form:option>
 									</c:if>
 									<c:if
-										test="${not empty selectedNhom && selectedNhom != item.nhomMonHoc}">
-										<form:option value="${selectedLink2 }">Nhóm ${item.nhomMonHoc }</form:option>
+										test="${not empty selectedNhom && selectedNhom != item}">
+										<form:option value="${selectedLink2 }">Nhóm ${item }</form:option>
 									</c:if>
 									<c:if
-										test="${not empty selectedNhom && selectedNhom == item.nhomMonHoc}">
-										<form:option value="${selectedLink2 }" selected="selected">Nhóm ${item.nhomMonHoc }</form:option>
+										test="${not empty selectedNhom && selectedNhom == item}">
+										<form:option value="${selectedLink2 }" selected="selected">Nhóm ${item }</form:option>
 									</c:if>
 								</c:forEach>
 							</form:select>
 						</div>
 					</c:if>
 				</div>
-				<a class="btn btn-success px-5" href="/monhoc/dsmh">Reset</a>
+				<a class="btn btn-success px-5" href="/monhoc">Reset</a>
 			</form>
 
 			<c:if test="${not empty selectedId }">
