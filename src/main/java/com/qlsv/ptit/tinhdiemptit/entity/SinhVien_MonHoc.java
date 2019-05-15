@@ -37,17 +37,18 @@ public class SinhVien_MonHoc {
 	private NhomMonHoc nhomMonHoc;
 	
 	
-	@OneToMany(mappedBy = "sinhVienMonHoc", cascade = CascadeType.ALL)
-	private List<DiemSo> lstDiemSo;
+	@OneToOne(mappedBy = "sinhVienMonHoc", cascade = CascadeType.ALL)
+	private DiemSo diemSo;
 	
 	public SinhVien_MonHoc() {
 		
 	}
 
-	public SinhVien_MonHoc(SinhVien sinhVien, NhomMonHoc nhomMonHoc, List<DiemSo> lstDiemSo) {
+	public SinhVien_MonHoc(int id, SinhVien sinhVien, NhomMonHoc nhomMonHoc, DiemSo diemSo) {
+		this.id = id;
 		this.sinhVien = sinhVien;
 		this.nhomMonHoc = nhomMonHoc;
-		this.lstDiemSo = lstDiemSo;
+		this.diemSo = diemSo;
 	}
 
 	public int getId() {
@@ -74,12 +75,12 @@ public class SinhVien_MonHoc {
 		this.nhomMonHoc = nhomMonHoc;
 	}
 
-	public List<DiemSo> getLstDiemSo() {
-		return lstDiemSo;
+	public DiemSo getDiemSo() {
+		return diemSo;
 	}
 
-	public void setLstDiemSo(List<DiemSo> lstDiemSo) {
-		this.lstDiemSo = lstDiemSo;
+	public void setDiemSo(DiemSo diemSo) {
+		this.diemSo = diemSo;
 	}
 	
 }
