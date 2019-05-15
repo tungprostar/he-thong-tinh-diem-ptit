@@ -35,8 +35,9 @@ public class DiemSo {
 	@Column(name="diem_tb")
 	private Float diemTB;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-	@JoinColumn(name="sinhvien_monhoc_id")
+	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	@JoinColumn(name = "sinhvien_monhoc_id")
 	private SinhVien_MonHoc sinhVienMonHoc;
 
 	
