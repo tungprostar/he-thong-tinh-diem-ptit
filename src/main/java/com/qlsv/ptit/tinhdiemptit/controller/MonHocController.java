@@ -43,11 +43,10 @@ public class MonHocController {
 
 	@Autowired
 	private TinhDiemService tinhDiemService;
-	
-	private String cauHinhCheck;
 
 	@GetMapping(value= {"", "/{maMonHoc}", "/{maMonHoc}/{nhomMonHoc}"})
-	public String getListMonHocTheoNhom(Model model, @PathVariable(required = false) String maMonHoc,
+	public String getListMonHocTheoNhom(Model model, 
+			@PathVariable(required = false) String maMonHoc,
 			@PathVariable(required = false) Integer nhomMonHoc) {
 		List<MonHoc_MaMonHoc> listMonHoc = monHocService.findMonHocDropDown();
 		model.addAttribute("listMonHoc", listMonHoc);
@@ -59,7 +58,6 @@ public class MonHocController {
 			model.addAttribute("selectedId", maMonHoc);
 			model.addAttribute("listNhomMonHoc", listNhomMonHoc);
 			model.addAttribute("listMonHocs", listMonHocs);
-			cauHinhCheck = cauHinhDiem;
 			if (nhomMonHoc != null) {
 				model.addAttribute("selectedNhom", nhomMonHoc);
 			}
@@ -71,13 +69,11 @@ public class MonHocController {
 	public String getListSinhVienTheoNhom(Model model,
 			@PathVariable String maMonHoc,
 			@PathVariable Integer nhomMonHoc,
-//			@RequestParam(name = "maMonHoc", required = false) String maMonHoc,
-//			@RequestParam(name = "nhomMH", required = false) Integer nhomMonHoc, 
-			@RequestParam(name = "tenMH", required = false) String tenMH,
-			@RequestParam(name = "giangVien", required = false) String giangVien,
-			@RequestParam(name = "cauHinhDiem", required = false) String cauHinhDiem) {
+			@RequestParam(name = "tenMH") String tenMH,
+			@RequestParam(name = "giangVien") String giangVien) {
 		List<SinhVien_Diem> listSinhVienDiem = sinhVienService.findByNhomMonHoc(maMonHoc, nhomMonHoc);
-		if(!cauHinhDiem.isEmpty() && cauHinhDiem != cauHinhCheck) {
+		String cauHinhDiem = cauHinhDiemService.findById(maMonHoc);
+		if(!cauHinhDiem.isEmpty()) {
 			tinhDiemService.formatCauHinh(cauHinhDiem);	
 			tinhDiemService.setDiemSinhVien(listSinhVienDiem, nhomMonHoc, maMonHoc);
 		}	
@@ -86,28 +82,28 @@ public class MonHocController {
 		model.addAttribute("nhomMH", nhomMonHoc);
 		model.addAttribute("giangVien", giangVien);
 		model.addAttribute("tenMH", tenMH);
-		model.addAttribute("cauHinhDiem", cauHinhDiem);
 		model.addAttribute("maMonHoc", maMonHoc);
+		model.addAttribute("cauHinhDiem", cauHinhDiem);
 		return "/sinhvien/danhsachsinhvien";
 	}
 
 	@PostMapping("/{maMonHoc}/{nhomMonHoc}/dssv/saveDiemSo")
-	public String saveDiemSinhVien(Model model, RedirectAttributes ra, @ModelAttribute("lst") DiemSos lst,
-			@PathVariable Integer nhomMonHoc, @PathVariable String maMonHoc,
-			@RequestParam("tenMH") String tenMH, @RequestParam("giangVien") String giangVien,
-			@RequestParam("cauHinh") String cauHinhDiem) {
-		
+	public String saveDiemSinhVien(Model model, 
+			RedirectAttributes ra, 
+			@ModelAttribute("lst") DiemSos lst,
+			@PathVariable Integer nhomMonHoc, 
+			@PathVariable String maMonHoc,
+			@RequestParam("tenMH") String tenMH, 
+			@RequestParam("giangVien") String giangVien) {
+		String cauHinhDiem = cauHinhDiemService.findById(maMonHoc);
 		List<SinhVien_Diem> listSinhVienDiem = lst.getListSinhVienDiem();
 		if(!cauHinhDiem.isEmpty()) {
 			tinhDiemService.formatCauHinh(cauHinhDiem);
 		}
 		tinhDiemService.setDiemSinhVien(listSinhVienDiem, nhomMonHoc, maMonHoc);
 		// Redirect đẩy dữ liệu sang
-		ra.addAttribute("nhomMH", nhomMonHoc);
 		ra.addAttribute("giangVien", giangVien);
 		ra.addAttribute("tenMH", tenMH);
-		ra.addAttribute("cauHinhDiem", cauHinhDiem);
-		ra.addAttribute("maMonHoc", maMonHoc);
 		return "redirect:/monhoc/" +maMonHoc+ "/" +nhomMonHoc+ "/dssv";
 	}
 }

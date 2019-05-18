@@ -103,11 +103,8 @@
 								<td>
 								
 									<c:url value="/monhoc/${selectedId }/${item.nhomMonHoc }/dssv" var="urlLink">
-<%-- 										<c:param name="maMonHoc" value="${selectedId }"></c:param> --%>
 										<c:param name="tenMH" value="${item.tenMonHoc }"></c:param>
-<%-- 										<c:param name="nhomMH" value="${item.nhomMonHoc }"></c:param> --%>
 										<c:param name="giangVien" value="${item.giangVien }"></c:param>
-										<c:param name="cauHinhDiem" value="${cauHinhDiem }"></c:param>
 									</c:url>
 									<a href="${urlLink }">dssv</a>
 									
