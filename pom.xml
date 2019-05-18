@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.qlsv.ptit</groupId>
-	<artifactId>tinh-diem-ptit</artifactId>
+	<artifactId>he-thong-quan-ly-diem-ptit</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tinh-diem-ptit</name>
+	<name>he-thong-quan-ly-diem-ptit</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
